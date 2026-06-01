@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}NewsHub{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">NewsHub</a>
+      <nav>
+        <a href="/" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Top Headlines</a>
+        <a href="/search" class="nav-link {% if request.endpoint == 'search' %}active{% endif %}">Search</a>
+        <a href="/sources" class="nav-link {% if request.endpoint == 'sources' %}active{% endif %}">Sources</a>
+      </nav>
+      <form action="/search" method="get" class="header-search">
+        <input type="text" name="q" placeholder="Search news..." value="{{ request.args.get('q', '') }}" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>Powered by <a href="https://newsapi.org" target="_blank">NewsAPI.org</a></p>
+  </footer>
+</body>
+</html>

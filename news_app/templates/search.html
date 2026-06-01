@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Search{% if query %}: {{ query }}{% endif %} — NewsHub{% endblock %}
+
+{% block content %}
+<div class="search-page">
+  <h1>Search News</h1>
+  <form method="get" action="/search" class="search-form">
+    <input type="text" name="q" placeholder="Enter keywords..." value="{{ query }}" autofocus />
+    <select name="sort">
+      <option value="publishedAt" {% if sort == 'publishedAt' %}selected{% endif %}>Newest</option>
+      <option value="relevancy" {% if sort == 'relevancy' %}selected{% endif %}>Relevancy</option>
+      <option value="popularity" {% if sort == 'popularity' %}selected{% endif %}>Popularity</option>
+    </select>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+{% if query %}
+  <div class="page-header">
+    <h2>Results for "{{ query }}"</h2>
+    {% if total %}<span class="result-count">{{ total }} articles found</span>{% endif %}
+  </div>
+
+  {% if error %}
+    <div class="error-banner">{{ error }}</div>
+  {% elif articles %}
+    <div class="article-grid">
+      {% for article in articles %}
+      <article class="card">
+        {% if article.urlToImage %}
+        <div class="card-image">
+          <img src="{{ article.urlToImage }}" alt="{{ article.title }}" loading="lazy" onerror="this.parentElement.style.display='none'" />
+        </div>
+        {% endif %}
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source">{{ article.source.name }}</span>
+            {% if article.publishedAt %}
+            <span class="date">{{ article.publishedAt[:10] }}</span>
+            {% endif %}
+          </div>
+          <h2 class="card-title">
+            <a href="{{ article.url }}" target="_blank" rel="noopener">{{ article.title }}</a>
+          </h2>
+          {% if article.description %}
+          <p class="card-description">{{ article.description }}</p>
+          {% endif %}
+          <a href="{{ article.url }}" target="_blank" rel="noopener" class="read-more">Read More &rarr;</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    {% if total_pages > 1 %}
+    <nav class="pagination">
+      {% if page > 1 %}
+      <a href="?q={{ query }}&sort={{ sort }}&page={{ page - 1 }}" class="page-btn">&larr; Prev</a>
+      {% endif %}
+      {% for p in range(1, total_pages + 1) %}
+      <a href="?q={{ query }}&sort={{ sort }}&page={{ p }}"
+         class="page-btn {% if p == page %}current{% endif %}">{{ p }}</a>
+      {% endfor %}
+      {% if page < total_pages %}
+      <a href="?q={{ query }}&sort={{ sort }}&page={{ page + 1 }}" class="page-btn">Next &rarr;</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  {% else %}
+    <div class="empty-state">No articles found for "{{ query }}".</div>
+  {% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Top Headlines — NewsHub{% endblock %}
+
+{% block content %}
+<section class="filters">
+  <form method="get" action="/">
+    <div class="filter-group">
+      <label for="category">Category</label>
+      <select name="category" id="category" onchange="this.form.submit()">
+        {% for cat in categories %}
+        <option value="{{ cat }}" {% if cat == category %}selected{% endif %}>{{ cat|capitalize }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="country">Country</label>
+      <select name="country" id="country" onchange="this.form.submit()">
+        {% for code, name in countries.items() %}
+        <option value="{{ code }}" {% if code == country %}selected{% endif %}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+</section>
+
+<div class="page-header">
+  <h1>{{ category|capitalize }} Headlines</h1>
+  {% if total %}<span class="result-count">{{ total }} articles found</span>{% endif %}
+</div>
+
+{% if error %}
+  <div class="error-banner">{{ error }}</div>
+{% elif articles %}
+  <div class="article-grid">
+    {% for article in articles %}
+    <article class="card">
+      {% if article.urlToImage %}
+      <div class="card-image">
+        <img src="{{ article.urlToImage }}" alt="{{ article.title }}" loading="lazy" onerror="this.parentElement.style.display='none'" />
+      </div>
+      {% endif %}
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="source">{{ article.source.name }}</span>
+          {% if article.publishedAt %}
+          <span class="date">{{ article.publishedAt[:10] }}</span>
+          {% endif %}
+        </div>
+        <h2 class="card-title">
+          <a href="{{ article.url }}" target="_blank" rel="noopener">{{ article.title }}</a>
+        </h2>
+        {% if article.description %}
+        <p class="card-description">{{ article.description }}</p>
+        {% endif %}
+        <a href="{{ article.url }}" target="_blank" rel="noopener" class="read-more">Read More &rarr;</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if total_pages > 1 %}
+  <nav class="pagination">
+    {% if page > 1 %}
+    <a href="?category={{ category }}&country={{ country }}&page={{ page - 1 }}" class="page-btn">&larr; Prev</a>
+    {% endif %}
+    {% for p in range(1, total_pages + 1) %}
+    <a href="?category={{ category }}&country={{ country }}&page={{ p }}"
+       class="page-btn {% if p == page %}current{% endif %}">{{ p }}</a>
+    {% endfor %}
+    {% if page < total_pages %}
+    <a href="?category={{ category }}&country={{ country }}&page={{ page + 1 }}" class="page-btn">Next &rarr;</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+{% else %}
+  <div class="empty-state">No articles found. Try a different category or country.</div>
+{% endif %}
+{% endblock %}

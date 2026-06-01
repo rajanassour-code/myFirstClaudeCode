@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Sources — NewsHub{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>News Sources</h1>
+</div>
+
+<section class="filters">
+  <form method="get" action="/sources">
+    <div class="filter-group">
+      <label for="category">Category</label>
+      <select name="category" id="category" onchange="this.form.submit()">
+        <option value="">All</option>
+        {% for cat in categories %}
+        <option value="{{ cat }}" {% if cat == category %}selected{% endif %}>{{ cat|capitalize }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="country">Country</label>
+      <select name="country" id="country" onchange="this.form.submit()">
+        <option value="">All</option>
+        {% for code, name in countries.items() %}
+        <option value="{{ code }}" {% if code == country %}selected{% endif %}>{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+</section>
+
+{% if error %}
+  <div class="error-banner">{{ error }}</div>
+{% elif sources %}
+  <div class="sources-grid">
+    {% for s in sources %}
+    <div class="source-card">
+      <div class="source-card-header">
+        <h3><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.name }}</a></h3>
+        <div class="source-badges">
+          {% if s.category %}<span class="badge">{{ s.category }}</span>{% endif %}
+          {% if s.country %}<span class="badge">{{ s.country|upper }}</span>{% endif %}
+          {% if s.language %}<span class="badge">{{ s.language|upper }}</span>{% endif %}
+        </div>
+      </div>
+      {% if s.description %}
+      <p class="source-desc">{{ s.description }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty-state">No sources found.</div>
+{% endif %}
+{% endblock %}
