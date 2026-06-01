@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>CMS Admin — Raja J. Nassour</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sidebar: #0f172a;
+      --sidebar-hover: #1e293b;
+      --accent: #6366f1;
+      --accent-h: #4f46e5;
+      --bg: #f8fafc;
+      --surface: #fff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --r: 12px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 240px; flex-shrink: 0; background: var(--sidebar); display: flex; flex-direction: column;
+      position: fixed; left: 0; top: 0; bottom: 0; z-index: 100;
+    }
+    .sidebar-logo {
+      padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .sidebar-logo-badge { display: inline-block; background: var(--accent); color: #fff; font-weight: 900; font-size: .8rem; width: 32px; height: 32px; border-radius: 8px; text-align: center; line-height: 32px; margin-bottom: 8px; }
+    .sidebar-logo-title { font-size: .8rem; color: rgba(255,255,255,.4); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+    .sidebar-logo-name  { font-size: .9rem; color: #fff; font-weight: 700; }
+    .sidebar-nav { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 2px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px;
+      color: rgba(255,255,255,.55); font-size: .875rem; font-weight: 500; cursor: pointer;
+      transition: background .15s, color .15s; border: none; background: none; width: 100%; text-align: left;
+    }
+    .nav-item:hover { background: var(--sidebar-hover); color: rgba(255,255,255,.85); }
+    .nav-item.active { background: var(--accent); color: #fff; }
+    .nav-item .nav-icon { font-size: 1rem; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 14px 10px; border-top: 1px solid rgba(255,255,255,.08); }
+    .sidebar-footer a { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,.4); font-size: .8rem; text-decoration: none; padding: 8px 12px; border-radius: 8px; transition: color .15s, background .15s; }
+    .sidebar-footer a:hover { color: rgba(255,255,255,.7); background: var(--sidebar-hover); }
+
+    /* ── Main ── */
+    .main { margin-left: 240px; flex: 1; padding: 32px; min-height: 100vh; }
+    .page-title { font-size: 1.5rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .page-desc  { font-size: .875rem; color: var(--muted); margin-bottom: 28px; }
+
+    /* ── Panels (tabs) ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Cards ── */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; margin-bottom: 20px; }
+    .card-title { font-size: .875rem; font-weight: 700; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+
+    /* ── Form fields ── */
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    label { display: block; font-size: .8rem; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .04em; }
+    input[type=text], input[type=email], input[type=tel], textarea, select {
+      width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: .9rem; color: var(--text); background: var(--bg);
+      transition: border-color .15s, box-shadow .15s; outline: none; font-family: inherit;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
+    textarea { resize: vertical; min-height: 80px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+    /* ── Save bar ── */
+    .save-bar { display: flex; align-items: center; gap: 14px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .btn-save { padding: 10px 24px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: .875rem; font-weight: 700; cursor: pointer; transition: background .15s; }
+    .btn-save:hover { background: var(--accent-h); }
+    .btn-save:disabled { opacity: .6; cursor: not-allowed; }
+    .save-status { font-size: .85rem; font-weight: 600; }
+    .save-status.ok  { color: var(--success); }
+    .save-status.err { color: var(--danger); }
+
+    /* ── List items (chips, projects, etc.) ── */
+    .list-item {
+      display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;
+    }
+    .list-item-body { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .btn-remove { padding: 4px 10px; background: none; border: 1.5px solid var(--border); border-radius: 6px; color: var(--danger); font-size: .8rem; font-weight: 700; cursor: pointer; transition: background .15s, border-color .15s; flex-shrink: 0; margin-top: 2px; }
+    .btn-remove:hover { background: #fef2f2; border-color: var(--danger); }
+    .btn-add { padding: 8px 16px; background: none; border: 1.5px dashed var(--border); border-radius: 8px; color: var(--accent); font-size: .83rem; font-weight: 700; cursor: pointer; width: 100%; transition: border-color .15s, background .15s; }
+    .btn-add:hover { border-color: var(--accent); background: rgba(99,102,241,.04); }
+
+    /* ── Pills list ── */
+    .pills-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .pill-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(99,102,241,.08); border: 1px solid rgba(99,102,241,.2); border-radius: 999px; font-size: .8rem; font-weight: 600; color: var(--accent); }
+    .pill-tag button { background: none; border: none; cursor: pointer; color: var(--muted); font-size: .9rem; line-height: 1; padding: 0 2px; }
+    .pill-tag button:hover { color: var(--danger); }
+    .pill-input { display: flex; gap: 8px; margin-top: 8px; }
+    .pill-input input { flex: 1; }
+    .btn-pill-add { padding: 8px 14px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: .8rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+
+    /* ── Checkbox ── */
+    .check-row { display: flex; align-items: center; gap: 10px; }
+    .check-row input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
+    .check-row span { font-size: .875rem; font-weight: 600; color: var(--text); }
+
+    /* ── Section divider ── */
+    .section-label { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 20px 0 10px; }
+
+    /* ── Accordion (for experience jobs) ── */
+    .accordion { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; margin-bottom: 14px; }
+    .accordion-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--surface); cursor: pointer; font-weight: 700; font-size: .9rem; }
+    .accordion-head:hover { background: var(--bg); }
+    .accordion-body { padding: 18px; border-top: 1px solid var(--border); display: none; }
+    .accordion-body.open { display: block; }
+    .accordion-toggle { font-size: .75rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-badge">RJN</div>
+    <div class="sidebar-logo-title">Back Office</div>
+    <div class="sidebar-logo-name">Content Manager</div>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" onclick="showPanel('home',this)"><span class="nav-icon">🏠</span> Home</button>
+    <button class="nav-item" onclick="showPanel('about',this)"><span class="nav-icon">👤</span> About</button>
+    <button class="nav-item" onclick="showPanel('experience',this)"><span class="nav-icon">💼</span> Experience</button>
+    <button class="nav-item" onclick="showPanel('skills',this)"><span class="nav-icon">⚙️</span> Skills</button>
+    <button class="nav-item" onclick="showPanel('contact',this)"><span class="nav-icon">📬</span> Contact</button>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="/" target="_blank">↗ &nbsp;View Website</a>
+  </div>
+</aside>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- HOME -->
+  <div class="panel active" id="panel-home">
+    <div class="page-title">Home Page</div>
+    <div class="page-desc">Edit the hero section, stats bar, and intro strip.</div>
+
+    <div class="card">
+      <div class="card-title">Hero Section</div>
+      <div class="field"><label>Badge Text</label><input type="text" id="h-badge"/></div>
+      <div class="grid-2">
+        <div class="field"><label>First Name / Line 1</label><input type="text" id="h-nameFirst"/></div>
+        <div class="field"><label>Last Name (highlighted)</label><input type="text" id="h-nameLast"/></div>
+      </div>
+      <div class="field"><label>Role / Job Title</label><input type="text" id="h-role"/></div>
+      <div class="field"><label>Location</label><input type="text" id="h-location"/></div>
+      <div class="grid-3">
+        <div class="field"><label>Primary Button</label><input type="text" id="h-cta1-label"/></div>
+        <div class="field"><label>Secondary Button</label><input type="text" id="h-cta2-label"/></div>
+        <div class="field"><label>CV Button</label><input type="text" id="h-ctaCV-label"/></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Profile Card Chips</div>
+      <div id="chips-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Stats Bar</div>
+      <div id="stats-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Intro Strip</div>
+      <div class="field"><label>Heading</label><input type="text" id="h-intro-heading"/></div>
+      <div class="field"><label>Text</label><textarea id="h-intro-text" rows="3"></textarea></div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn-save" onclick="saveSection('home')">Save Changes</button>
+      <span class="save-status" id="status-home"></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="panel" id="panel-about">
+    <div class="page-title">About Page</div>
+    <div class="page-desc">Edit your personal statement, bio, values, profile info, and education.</div>
+
+    <div class="card">
+      <div class="card-title">Personal Statement</div>
+      <div class="field"><label>Blockquote Text</label><textarea id="a-statement" rows="3"></textarea></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bio Paragraphs</div>
+      <div id="bio-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Core Values</div>
+      <div id="values-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Profile Sidebar</div>
+      <div class="grid-2">
+        <div class="field"><label>Full Name</label><input type="text" id="a-p-name"/></div>
+        <div class="field"><label>Role / Title</label><input type="text" id="a-p-role"/></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Location</label><input type="text" id="a-p-location"/></div>
+        <div class="field"><label>Country</label><input type="text" id="a-p-country"/></div>
+      </div>
+      <div class="grid-3">
+        <div class="field"><label>Experience</label><input type="text" id="a-p-experience"/></div>
+        <div class="field"><label>Sector</label><input type="text" id="a-p-sector"/></div>
+        <div class="field"><label>Email</label><input type="email" id="a-p-email"/></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Education</div>
+      <div class="field"><label>Degree</label><input type="text" id="a-edu-degree"/></div>
+      <div class="grid-2">
+        <div class="field"><label>University</label><input type="text" id="a-edu-uni"/></div>
+        <div class="field"><label>Graduated</label><input type="text" id="a-edu-grad"/></div>
+      </div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn-save" onclick="saveSection('about')">Save Changes</button>
+      <span class="save-status" id="status-about"></span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="panel" id="panel-experience">
+    <div class="page-title">Experience Page</div>
+    <div class="page-desc">Edit job positions and their projects.</div>
+
+    <div id="jobs-list"></div>
+
+    <div class="card">
+      <div class="card-title">Education Block</div>
+      <div class="field"><label>Degree</label><input type="text" id="e-edu-degree"/></div>
+      <div class="field"><label>Details</label><input type="text" id="e-edu-details"/></div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn-save" onclick="saveSection('experience')">Save Changes</button>
+      <span class="save-status" id="status-experience"></span>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="panel" id="panel-skills">
+    <div class="page-title">Skills Page</div>
+    <div class="page-desc">Edit skill categories, technologies, and banking domain expertise.</div>
+
+    <div class="card">
+      <div class="card-title">Stats Numbers</div>
+      <div id="skill-stats-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Skill Categories</div>
+      <div id="skill-cats-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Banking Domain Items</div>
+      <div id="domains-list"></div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn-save" onclick="saveSection('skills')">Save Changes</button>
+      <span class="save-status" id="status-skills"></span>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="panel" id="panel-contact">
+    <div class="page-title">Contact Page</div>
+    <div class="page-desc">Edit phone, email, address, and availability status.</div>
+
+    <div class="card">
+      <div class="card-title">Contact Details</div>
+      <div class="grid-2">
+        <div class="field"><label>Phone</label><input type="tel" id="c-phone"/></div>
+        <div class="field"><label>Email</label><input type="email" id="c-email"/></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>Address</label><input type="text" id="c-address"/></div>
+        <div class="field"><label>City, Country</label><input type="text" id="c-city"/></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Availability Card</div>
+      <div class="field"><label>Heading</label><input type="text" id="c-avail-title"/></div>
+      <div class="field"><label>Description Text</label><textarea id="c-avail-text" rows="3"></textarea></div>
+      <div class="field"><label>Badge Text</label><input type="text" id="c-avail-badge"/></div>
+      <div class="field"><div class="check-row"><input type="checkbox" id="c-avail-active"/><span>Show as "Currently Available"</span></div></div>
+    </div>
+
+    <div class="save-bar">
+      <button class="btn-save" onclick="saveSection('contact')">Save Changes</button>
+      <span class="save-status" id="status-contact"></span>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ── State ──────────────────────────────────────────────────────
+var state = { home: null, about: null, experience: null, skills: null, contact: null };
+
+// ── Navigation ────────────────────────────────────────────────
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (!state[name]) loadSection(name);
+}
+
+// ── Load ──────────────────────────────────────────────────────
+function loadSection(name) {
+  fetch('/api/content/' + name)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      state[name] = data;
+      if (name === 'home')       renderHome(data);
+      if (name === 'about')      renderAbout(data);
+      if (name === 'experience') renderExperience(data);
+      if (name === 'skills')     renderSkills(data);
+      if (name === 'contact')    renderContact(data);
+    });
+}
+
+// ── Save ──────────────────────────────────────────────────────
+function saveSection(name) {
+  if (name === 'home')       collectHome();
+  if (name === 'about')      collectAbout();
+  if (name === 'experience') collectExperience();
+  if (name === 'skills')     collectSkills();
+  if (name === 'contact')    collectContact();
+
+  var statusEl = document.getElementById('status-' + name);
+  statusEl.textContent = 'Saving…';
+  statusEl.className = 'save-status';
+
+  fetch('/api/content/' + name, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(state[name])
+  })
+  .then(function(r) { return r.json(); })
+  .then(function() {
+    statusEl.textContent = '✓ Saved successfully';
+    statusEl.className = 'save-status ok';
+    setTimeout(function() { statusEl.textContent = ''; }, 3000);
+  })
+  .catch(function() {
+    statusEl.textContent = '✕ Save failed';
+    statusEl.className = 'save-status err';
+  });
+}
+
+function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function checked(id) { var el = document.getElementById(id); return el ? el.checked : false; }
+function set(id, v) { var el = document.getElementById(id); if (el) { if (el.type === 'checkbox') el.checked = !!v; else el.value = v || ''; } }
+
+// ════════════════════════════════════════════════════
+//  HOME
+// ════════════════════════════════════════════════════
+function renderHome(d) {
+  set('h-badge', d.hero.badge);
+  set('h-nameFirst', d.hero.nameFirst);
+  set('h-nameLast', d.hero.nameLast);
+  set('h-role', d.hero.role);
+  set('h-location', d.hero.location);
+  set('h-cta1-label', d.hero.ctaPrimary.label);
+  set('h-cta2-label', d.hero.ctaSecondary.label);
+  set('h-ctaCV-label', d.hero.ctaCV.label);
+  set('h-intro-heading', d.intro.heading);
+  set('h-intro-text', d.intro.text);
+  renderChips(d.hero.chips);
+  renderStats(d.stats);
+}
+
+function renderChips(chips) {
+  var el = document.getElementById('chips-list');
+  el.innerHTML = '';
+  chips.forEach(function(c, i) {
+    el.innerHTML += '<div class="list-item" id="chip-' + i + '">' +
+      '<div class="list-item-body">' +
+        '<div class="grid-3">' +
+          '<div class="field"><label>Icon</label><input type="text" id="chip-icon-' + i + '" value="' + esc(c.icon) + '"/></div>' +
+          '<div class="field"><label>Value</label><input type="text" id="chip-val-' + i + '" value="' + esc(c.value) + '"/></div>' +
+          '<div class="field"><label>Text</label><input type="text" id="chip-text-' + i + '" value="' + esc(c.text) + '"/></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  });
+}
+
+function renderStats(stats) {
+  var el = document.getElementById('stats-list');
+  el.innerHTML = '';
+  stats.forEach(function(s, i) {
+    el.innerHTML += '<div class="list-item">' +
+      '<div class="list-item-body">' +
+        '<div class="grid-2">' +
+          '<div class="field"><label>Number</label><input type="text" id="stat-num-' + i + '" value="' + esc(s.num) + '"/></div>' +
+          '<div class="field"><label>Label</label><input type="text" id="stat-lbl-' + i + '" value="' + esc(s.label) + '"/></div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  });
+}
+
+function collectHome() {
+  var d = state.home;
+  d.hero.badge = val('h-badge');
+  d.hero.nameFirst = val('h-nameFirst');
+  d.hero.nameLast = val('h-nameLast');
+  d.hero.role = val('h-role');
+  d.hero.location = val('h-location');
+  d.hero.ctaPrimary.label = val('h-cta1-label');
+  d.hero.ctaSecondary.label = val('h-cta2-label');
+  d.hero.ctaCV.label = val('h-ctaCV-label');
+  d.intro.heading = val('h-intro-heading');
+  d.intro.text = val('h-intro-text');
+  d.hero.chips = d.hero.chips.map(function(c, i) {
+    return { icon: val('chip-icon-'+i), value: val('chip-val-'+i), text: val('chip-text-'+i) };
+  });
+  d.stats = d.stats.map(function(s, i) {
+    return { num: val('stat-num-'+i), label: val('stat-lbl-'+i) };
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  ABOUT
+// ════════════════════════════════════════════════════
+function renderAbout(d) {
+  set('a-statement', d.statement);
+  renderBioList(d.bio);
+  renderValuesList(d.values);
+  set('a-p-name', d.profile.name);
+  set('a-p-role', d.profile.role);
+  set('a-p-location', d.profile.location);
+  set('a-p-country', d.profile.country);
+  set('a-p-experience', d.profile.experience);
+  set('a-p-sector', d.profile.sector);
+  set('a-p-email', d.profile.email);
+  set('a-edu-degree', d.education.degree);
+  set('a-edu-uni', d.education.university);
+  set('a-edu-grad', d.education.graduated);
+}
+
+function renderBioList(bio) {
+  var el = document.getElementById('bio-list');
+  el.innerHTML = bio.map(function(p, i) {
+    return '<div class="field" style="margin-bottom:12px;"><label>Paragraph ' + (i+1) + '</label>' +
+      '<textarea id="bio-p-' + i + '" rows="3">' + esc(p) + '</textarea></div>';
+  }).join('');
+}
+
+function renderValuesList(values) {
+  var el = document.getElementById('values-list');
+  el.innerHTML = values.map(function(v, i) {
+    return '<div class="list-item">' +
+      '<div class="list-item-body">' +
+        '<div class="grid-2">' +
+          '<div class="field"><label>Icon</label><input type="text" id="val-icon-' + i + '" value="' + esc(v.icon) + '"/></div>' +
+          '<div class="field"><label>Title</label><input type="text" id="val-title-' + i + '" value="' + esc(v.title) + '"/></div>' +
+        '</div>' +
+        '<div class="field"><label>Description</label><textarea id="val-desc-' + i + '" rows="2">' + esc(v.desc) + '</textarea></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function collectAbout() {
+  var d = state.about;
+  d.statement = val('a-statement');
+  d.bio = d.bio.map(function(_, i) { return val('bio-p-' + i); });
+  d.values = d.values.map(function(v, i) {
+    return { icon: val('val-icon-'+i), color: v.color, title: val('val-title-'+i), desc: val('val-desc-'+i) };
+  });
+  d.profile.name = val('a-p-name');
+  d.profile.role = val('a-p-role');
+  d.profile.location = val('a-p-location');
+  d.profile.country = val('a-p-country');
+  d.profile.experience = val('a-p-experience');
+  d.profile.sector = val('a-p-sector');
+  d.profile.email = val('a-p-email');
+  d.education.degree = val('a-edu-degree');
+  d.education.university = val('a-edu-uni');
+  d.education.graduated = val('a-edu-grad');
+}
+
+// ════════════════════════════════════════════════════
+//  EXPERIENCE
+// ════════════════════════════════════════════════════
+function renderExperience(d) {
+  var el = document.getElementById('jobs-list');
+  el.innerHTML = d.jobs.map(function(job, ji) {
+    var projects = job.projects.map(function(p, pi) {
+      return '<div class="list-item">' +
+        '<div class="list-item-body">' +
+          '<div class="field"><label>Project Name</label><input type="text" id="job-' + ji + '-proj-name-' + pi + '" value="' + esc(p.name) + '"/></div>' +
+          '<div class="field"><label>Description</label><textarea id="job-' + ji + '-proj-desc-' + pi + '" rows="3">' + esc(p.desc) + '</textarea></div>' +
+        '</div>' +
+        '<button class="btn-remove" onclick="removeProject(' + ji + ',' + pi + ')">Remove</button>' +
+      '</div>';
+    }).join('');
+
+    return '<div class="accordion" id="acc-job-' + ji + '">' +
+      '<div class="accordion-head" onclick="toggleAcc(\'acc-job-' + ji + '\')">' +
+        '<span>' + job.title + '</span>' +
+        '<span class="accordion-toggle">▼</span>' +
+      '</div>' +
+      '<div class="accordion-body" id="acc-body-job-' + ji + '">' +
+        '<div class="grid-2">' +
+          '<div class="field"><label>Job Title</label><input type="text" id="job-' + ji + '-title" value="' + esc(job.title) + '"/></div>' +
+          '<div class="field"><label>Company</label><input type="text" id="job-' + ji + '-company" value="' + esc(job.company) + '"/></div>' +
+        '</div>' +
+        '<div class="field"><label>Period</label><input type="text" id="job-' + ji + '-period" value="' + esc(job.period) + '"/></div>' +
+        '<div class="section-label">Projects</div>' +
+        '<div id="job-' + ji + '-projects">' + projects + '</div>' +
+        '<button class="btn-add" onclick="addProject(' + ji + ')">+ Add Project</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  set('e-edu-degree', d.education.degree);
+  set('e-edu-details', d.education.details);
+}
+
+function toggleAcc(id) {
+  var body = document.getElementById('acc-body-' + id.replace('acc-',''));
+  body.classList.toggle('open');
+}
+
+function addProject(ji) {
+  state.experience.jobs[ji].projects.push({ name: 'New Project', desc: '' });
+  renderExperience(state.experience);
+  document.getElementById('acc-body-job-' + ji).classList.add('open');
+}
+
+function removeProject(ji, pi) {
+  state.experience.jobs[ji].projects.splice(pi, 1);
+  renderExperience(state.experience);
+  document.getElementById('acc-body-job-' + ji).classList.add('open');
+}
+
+function collectExperience() {
+  var d = state.experience;
+  d.jobs.forEach(function(job, ji) {
+    job.title = val('job-' + ji + '-title');
+    job.company = val('job-' + ji + '-company');
+    job.period = val('job-' + ji + '-period');
+    job.projects.forEach(function(p, pi) {
+      p.name = val('job-' + ji + '-proj-name-' + pi);
+      p.desc = val('job-' + ji + '-proj-desc-' + pi);
+    });
+  });
+  d.education.degree = val('e-edu-degree');
+  d.education.details = val('e-edu-details');
+}
+
+// ════════════════════════════════════════════════════
+//  SKILLS
+// ════════════════════════════════════════════════════
+function renderSkills(d) {
+  // Stats
+  document.getElementById('skill-stats-list').innerHTML = d.stats.map(function(s, i) {
+    return '<div class="list-item"><div class="list-item-body"><div class="grid-2">' +
+      '<div class="field"><label>Number</label><input type="text" id="sk-stat-num-' + i + '" value="' + esc(s.num) + '"/></div>' +
+      '<div class="field"><label>Label</label><input type="text" id="sk-stat-lbl-' + i + '" value="' + esc(s.label) + '"/></div>' +
+      '</div></div></div>';
+  }).join('');
+
+  // Categories
+  document.getElementById('skill-cats-list').innerHTML = d.categories.map(function(cat, ci) {
+    var pills = cat.skills.map(function(sk, si) {
+      return '<div class="pill-tag">' + esc(sk) +
+        '<button onclick="removeSkill(' + ci + ',' + si + ')">×</button></div>';
+    }).join('');
+    return '<div class="list-item" style="flex-direction:column;align-items:stretch;">' +
+      '<div class="grid-2" style="margin-bottom:10px;">' +
+        '<div class="field"><label>Category Title</label><input type="text" id="cat-title-' + ci + '" value="' + esc(cat.title) + '"/></div>' +
+        '<div class="field"><label>Description</label><input type="text" id="cat-desc-' + ci + '" value="' + esc(cat.desc) + '"/></div>' +
+      '</div>' +
+      '<div class="field"><label>Skills / Techs</label>' +
+        '<div class="pills-row" id="cat-pills-' + ci + '">' + pills + '</div>' +
+        '<div class="pill-input"><input type="text" id="cat-new-skill-' + ci + '" placeholder="Add skill…"/>' +
+        '<button class="btn-pill-add" onclick="addSkill(' + ci + ')">Add</button></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Domains
+  document.getElementById('domains-list').innerHTML = d.domains.map(function(dm, di) {
+    return '<div class="list-item">' +
+      '<div class="list-item-body"><div class="grid-2">' +
+        '<div class="field"><label>Icon</label><input type="text" id="dm-icon-' + di + '" value="' + esc(dm.icon) + '"/></div>' +
+        '<div class="field"><label>Text</label><input type="text" id="dm-text-' + di + '" value="' + esc(dm.text) + '"/></div>' +
+      '</div></div>' +
+      '<button class="btn-remove" onclick="removeDomain(' + di + ')">Remove</button>' +
+    '</div>';
+  }).join('') + '<button class="btn-add" onclick="addDomain()">+ Add Domain</button>';
+}
+
+function addSkill(ci) {
+  var input = document.getElementById('cat-new-skill-' + ci);
+  var sk = input.value.trim();
+  if (!sk) return;
+  state.skills.categories[ci].skills.push(sk);
+  input.value = '';
+  renderSkills(state.skills);
+}
+
+function removeSkill(ci, si) {
+  state.skills.categories[ci].skills.splice(si, 1);
+  renderSkills(state.skills);
+}
+
+function addDomain() {
+  state.skills.domains.push({ icon: '🔹', text: 'New Domain' });
+  renderSkills(state.skills);
+}
+
+function removeDomain(di) {
+  state.skills.domains.splice(di, 1);
+  renderSkills(state.skills);
+}
+
+function collectSkills() {
+  var d = state.skills;
+  d.stats = d.stats.map(function(s, i) {
+    return { num: val('sk-stat-num-' + i), label: val('sk-stat-lbl-' + i) };
+  });
+  d.categories.forEach(function(cat, ci) {
+    cat.title = val('cat-title-' + ci);
+    cat.desc = val('cat-desc-' + ci);
+  });
+  d.domains = d.domains.map(function(dm, di) {
+    return { icon: val('dm-icon-' + di), text: val('dm-text-' + di) };
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  CONTACT
+// ════════════════════════════════════════════════════
+function renderContact(d) {
+  set('c-phone', d.phone);
+  set('c-email', d.email);
+  set('c-address', d.address);
+  set('c-city', d.city);
+  set('c-avail-title', d.availability.title);
+  set('c-avail-text', d.availability.text);
+  set('c-avail-badge', d.availability.badge);
+  set('c-avail-active', d.availability.active);
+}
+
+function collectContact() {
+  var d = state.contact;
+  d.phone = val('c-phone');
+  d.email = val('c-email');
+  d.address = val('c-address');
+  d.city = val('c-city');
+  d.availability.title = val('c-avail-title');
+  d.availability.text = val('c-avail-text');
+  d.availability.badge = val('c-avail-badge');
+  d.availability.active = checked('c-avail-active');
+}
+
+// ── Helpers ───────────────────────────────────────────────────
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Init ──────────────────────────────────────────────────────
+loadSection('home');
+</script>
+</body>
+</html>

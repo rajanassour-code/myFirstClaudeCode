@@ -1,9 +1,0 @@
-{
-  "name": "Rajan Assour",
-  "title": "Full Stack Developer",
-  "subtitle": "I build modern, scalable web applications with a focus on clean code and great user experiences.",
-  "ctaPrimary": { "label": "View My Work", "href": "#projects" },
-  "ctaSecondary": { "label": "Get In Touch", "href": "#contact" },
-  "profileImage": "/profile.jpg",
-  "availableForWork": true
-}

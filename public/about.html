@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>About — Raja J. Nassour</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .about-hero { background: url('assets/images/about.jpeg') center / cover no-repeat; }
+    .about-grid { display: grid; grid-template-columns: 1fr 320px; gap: 28px; align-items: start; }
+    .bio-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 40px; box-shadow: var(--sh-sm); margin-bottom: 24px; }
+    .bio-card blockquote { font-size: 1.1rem; font-style: italic; color: var(--s700); border-left: 4px solid var(--indigo); padding-left: 20px; margin: 0 0 24px; line-height: 1.75; }
+    .bio-card p { font-size: .965rem; color: var(--s600); line-height: 1.82; margin-bottom: 16px; }
+    .bio-card p:last-child { margin-bottom: 0; }
+    .values-label { margin-bottom: 16px; }
+    .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .val-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 20px; display: flex; gap: 14px; align-items: flex-start; box-shadow: var(--sh-sm); transition: box-shadow .2s, transform .2s; }
+    .val-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+    .val-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .val-title { font-size: .88rem; font-weight: 700; margin-bottom: 3px; }
+    .val-desc  { font-size: .79rem; color: var(--muted); line-height: 1.5; }
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+    .profile-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh-sm); }
+    .profile-photo-wrap { position: relative; height: 160px; background: linear-gradient(135deg, #e0e7ff, #ede9fe); }
+    .profile-photo-wrap::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg,rgba(15,23,42,.15) 0%,rgba(15,23,42,.55) 100%); }
+    .profile-avatar { position: absolute; bottom: -44px; left: 50%; transform: translateX(-50%); z-index: 2; width: 88px; height: 88px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: var(--sh-md); display: block; }
+    .profile-body { padding: 52px 24px 24px; text-align: center; }
+    .profile-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 3px; }
+    .profile-role { font-size: .8rem; color: var(--muted); margin-bottom: 16px; }
+    .info-table { border-top: 1px solid var(--border); padding-top: 14px; text-align: left; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--s100); font-size: .82rem; }
+    .info-row:last-child { border-bottom: none; }
+    .ir-key { color: var(--muted); font-weight: 500; }
+    .ir-val { font-weight: 700; color: var(--text); text-align: right; max-width: 55%; }
+    .edu-card { background: linear-gradient(135deg, #ede9fe, #e0e7ff); border: 1px solid rgba(124,58,237,.15); border-radius: var(--r); padding: 22px; box-shadow: var(--sh-sm); }
+    .edu-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .edu-icon { width: 42px; height: 42px; background: var(--violet); border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .edu-lbl { font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--violet); margin-bottom: 2px; }
+    .edu-deg { font-size: .9rem; font-weight: 800; }
+    .edu-uni { font-size: .8rem; color: var(--s600); line-height: 1.5; }
+    @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } .sidebar { order: -1; } .values-grid { grid-template-columns: 1fr; } .bio-card { padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="nav-badge">RJN</div>Raja J. Nassour</a>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nt" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="photo-hero about-hero">
+  <div class="photo-hero-overlay"></div>
+  <div class="photo-hero-content on-photo">
+    <div class="eyebrow eyebrow-line" style="color:rgba(255,255,255,.5);">About Me</div>
+    <h1 class="h1" style="color:#fff;margin-top:10px;margin-bottom:12px;">Who I Am</h1>
+    <p class="lead" style="color:rgba(255,255,255,.65);max-width:520px;">
+      A banking technology professional with over 19 years of experience building reliable, people‑centred financial systems across Lebanon and the region.
+    </p>
+  </div>
+</div>
+
+<main class="page">
+  <div class="about-grid">
+    <div>
+      <div class="bio-card">
+        <div class="eyebrow eyebrow-line" style="margin-bottom:20px;">Personal Statement</div>
+        <blockquote id="bio-statement"></blockquote>
+        <div id="bio-paragraphs"></div>
+      </div>
+      <div class="values-label"><div class="eyebrow eyebrow-line">Core Values</div></div>
+      <div class="values-grid" id="values-grid"></div>
+    </div>
+
+    <div class="sidebar">
+      <div class="profile-card">
+        <div class="profile-photo-wrap">
+          <img src="assets/images/raja_profile.jpeg" alt="Raja J. Nassour" class="profile-avatar"/>
+        </div>
+        <div class="profile-body">
+          <div class="profile-name" id="profile-name"></div>
+          <div class="profile-role" id="profile-role"></div>
+          <div class="info-table" id="info-table"></div>
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-top">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-lbl">Education</div>
+            <div class="edu-deg" id="edu-degree"></div>
+          </div>
+        </div>
+        <div class="edu-uni" id="edu-uni"></div>
+      </div>
+
+      <a href="CV - Raja Nassour-5.pdf" download class="btn btn-outline" style="width:100%;justify-content:center;border-color:var(--border);padding:14px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Full CV (PDF)
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+
+<script src="cms-loader.js"></script>
+<script>
+  loadPage('about', function(d) {
+    setText('bio-statement', '"' + d.statement + '"');
+    document.getElementById('bio-paragraphs').innerHTML =
+      d.bio.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+
+    document.getElementById('values-grid').innerHTML = d.values.map(function(v) {
+      return '<div class="val-card">' +
+        '<div class="val-icon" style="background:' + v.color + ';">' + v.icon + '</div>' +
+        '<div><div class="val-title">' + v.title + '</div><div class="val-desc">' + v.desc + '</div></div>' +
+        '</div>';
+    }).join('');
+
+    setText('profile-name', d.profile.name);
+    setText('profile-role', d.profile.role);
+    document.getElementById('info-table').innerHTML = [
+      ['Location', d.profile.location],
+      ['Country',  d.profile.country],
+      ['Experience', d.profile.experience],
+      ['Sector',   d.profile.sector],
+      ['Email',    '<a href="mailto:' + d.profile.email + '" style="color:var(--indigo);">' + d.profile.email + '</a>']
+    ].map(function(row) {
+      return '<div class="info-row"><span class="ir-key">' + row[0] + '</span><span class="ir-val">' + row[1] + '</span></div>';
+    }).join('');
+
+    setText('edu-degree', d.education.degree);
+    document.getElementById('edu-uni').innerHTML =
+      d.education.university + '<br><strong style="color:var(--s700);">Graduated ' + d.education.graduated + '</strong>';
+  });
+
+  loadContact(function(c) { renderFooter('site-footer', c); });
+</script>
+</body>
+</html>

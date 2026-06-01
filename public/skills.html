@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Skills — Raja J. Nassour</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .skills-hero { background: url('assets/images/skills.jpeg') center / cover no-repeat; }
+    .skill-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 40px; }
+    .sk-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 22px 20px; text-align: center; box-shadow: var(--sh-sm); }
+    .sk-stat-num { font-size: 1.9rem; font-weight: 900; letter-spacing: -.04em; background: linear-gradient(135deg, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .sk-stat-lbl { font-size: .78rem; color: var(--muted); font-weight: 500; margin-top: 3px; }
+    .skill-cat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh-sm); margin-bottom: 20px; transition: box-shadow .2s, transform .2s; }
+    .skill-cat:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+    .cat-header { display: flex; align-items: center; gap: 18px; padding: 24px 32px; border-bottom: 1px solid var(--border); }
+    .cat-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .cat-title { font-size: 1rem; font-weight: 800; margin-bottom: 3px; }
+    .cat-desc  { font-size: .82rem; color: var(--muted); }
+    .cat-body  { padding: 24px 32px; }
+    .pill-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+    .sk-pill { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; font-size: .875rem; font-weight: 600; border: 1.5px solid transparent; cursor: default; transition: transform .14s, box-shadow .14s; }
+    .sk-pill:hover { transform: translateY(-2px); box-shadow: var(--sh-md); }
+    .sk-pill .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .p-indigo  { background: var(--indigo-lt);  color: var(--indigo-dk); border-color: rgba(79,70,229,.2); }
+    .p-indigo  .dot { background: var(--indigo); }
+    .p-cyan    { background: var(--cyan-lt);    color: #155e75;          border-color: rgba(8,145,178,.2); }
+    .p-cyan    .dot { background: var(--cyan); }
+    .p-emerald { background: var(--emerald-lt); color: #065f46;          border-color: rgba(5,150,105,.2); }
+    .p-emerald .dot { background: var(--emerald); }
+    .domain-strip { position: relative; border-radius: var(--r); overflow: hidden; margin-top: 16px; background: url('assets/images/skills-domain.jpeg') center / cover no-repeat; }
+    .domain-strip-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,23,42,.93) 0%, rgba(30,27,75,.92) 100%); }
+    .domain-strip-inner { position: relative; z-index: 1; padding: 44px 40px; }
+    .domain-strip-inner .eyebrow { color: rgba(255,255,255,.4); }
+    .domain-strip-inner .eyebrow::before { background: rgba(255,255,255,.3); }
+    .domain-strip-inner h2 { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 8px 0 24px; }
+    .domain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: 11px; }
+    .domain-item { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 13px 16px; display: flex; align-items: center; gap: 11px; font-size: .84rem; font-weight: 500; color: rgba(255,255,255,.72); transition: background .14s, border-color .14s; }
+    .domain-item:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.2); color: #fff; }
+    .domain-item span { font-size: 1.1rem; }
+    @media (max-width: 640px) { .skill-stats { grid-template-columns: 1fr 1fr; } .skill-stats .sk-stat:last-child { grid-column: 1/-1; } .cat-header, .cat-body { padding: 20px 20px; } .domain-strip-inner { padding: 32px 22px; } }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="nav-badge">RJN</div>Raja J. Nassour</a>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="skills.html" class="active">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nt" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="photo-hero skills-hero">
+  <div class="photo-hero-overlay"></div>
+  <div class="photo-hero-content on-photo">
+    <div class="eyebrow eyebrow-line" style="color:rgba(255,255,255,.5);">Technical Toolkit</div>
+    <h1 class="h1" style="color:#fff;margin-top:10px;margin-bottom:12px;">Skills</h1>
+    <p class="lead" style="color:rgba(255,255,255,.62);max-width:520px;">
+      A versatile stack built over two decades — native iOS, modern web frameworks, enterprise databases, and deep banking domain expertise.
+    </p>
+  </div>
+</div>
+
+<main class="page">
+  <div class="skill-stats" id="skill-stats"></div>
+  <div id="skill-categories"></div>
+  <div class="domain-strip">
+    <div class="domain-strip-overlay"></div>
+    <div class="domain-strip-inner">
+      <div class="eyebrow eyebrow-line">Banking Domain</div>
+      <h2>Industry Expertise</h2>
+      <div class="domain-grid" id="domain-grid"></div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+
+<script src="cms-loader.js"></script>
+<script>
+  loadPage('skills', function(d) {
+    document.getElementById('skill-stats').innerHTML = d.stats.map(function(s) {
+      return '<div class="sk-stat"><div class="sk-stat-num">' + s.num + '</div><div class="sk-stat-lbl">' + s.label + '</div></div>';
+    }).join('');
+
+    document.getElementById('skill-categories').innerHTML = d.categories.map(function(cat) {
+      var pills = cat.skills.map(function(sk) {
+        return '<span class="sk-pill ' + cat.pillClass + '"><span class="dot"></span>' + sk + '</span>';
+      }).join('');
+      return '<div class="skill-cat">' +
+        '<div class="cat-header"><div class="cat-icon" style="background:' + cat.iconBg + ';">' + cat.icon + '</div>' +
+        '<div><div class="cat-title">' + cat.title + '</div><div class="cat-desc">' + cat.desc + '</div></div></div>' +
+        '<div class="cat-body"><div class="pill-wrap">' + pills + '</div></div>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('domain-grid').innerHTML = d.domains.map(function(dm) {
+      return '<div class="domain-item"><span>' + dm.icon + '</span> ' + dm.text + '</div>';
+    }).join('');
+  });
+
+  loadContact(function(c) { renderFooter('site-footer', c); });
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "jobs": [
+    {
+      "color": "var(--indigo)",
+      "title": "Assistant Head of Department / Senior Team Leader",
+      "company": "Blom Bank — IS Division",
+      "companyColor": "var(--indigo)",
+      "pillClass": "pill pill-indigo",
+      "period": "July 2015 — Present",
+      "projects": [
+        { "name": "📱 Blom Bank Mobile Application",         "desc": "Comprehensive mobile banking platform covering 70%+ of essential bank services with 120,000+ active users and 12,000+ daily logins. Includes live video and text chat with call-centre agents — especially vital during the COVID-19 pandemic." },
+        { "name": "🇯🇴 Blom Bank Jordan Mobile Application",  "desc": "Dedicated app for Jordanian customers covering 65%+ of banking needs, tailored to local regulations and connected to trusted Jordanian third-party providers for secure payments and SMS." },
+        { "name": "🕌 Blom Islamic Bank Portal (eBDB)",       "desc": "Online portal giving customers convenient access to Blom Islamic Bank's full suite of Sharia-compliant financial products, adhering strictly to Islamic ethical and financial principles." },
+        { "name": "🔄 Blom Bank Centralised Workflow",        "desc": "Redesigned branch processes into a centralised digital workflow optimising loan, check, card, and core banking activities across 80+ branches and head offices, with a multi-level escalation system." },
+        { "name": "✅ Clearing System",                       "desc": "Streamlined check management across all branches via integrated scanning, routing directly to and from the BDL clearing house — handling 10,000+ checks daily in multiple currencies." }
+      ]
+    },
+    {
+      "color": "var(--cyan)",
+      "title": "Treasury &amp; Capital Market Support Officer",
+      "company": "Bank of Beirut — IT Department",
+      "companyColor": "var(--cyan)",
+      "pillClass": "pill pill-cyan",
+      "period": "September 2007 — June 2015",
+      "projects": [
+        { "name": "💹 Misys Treasury (Sophis Value)",           "desc": "Full IT support for all treasury operations — front, middle, and back office. Deep expertise in FX (spot, forward, swaps), fixed income, and money market modules." },
+        { "name": "📊 Asset Fund Management",                   "desc": "Supported an application managing open-end, closed-end, listed and non-listed funds and structured products, including all financial reports and client confirmation letters." },
+        { "name": "🏦 Trade Finance",                          "desc": "Implemented digital credit workflow from branch initiation to departmental approval. Full support for letters of credit and guarantees from request through issuance to settlement." },
+        { "name": "📡 FX Blotter — Reuters Interface",          "desc": "Real-time P&L, position, and currency exposure from Reuters prices. Money-market cash flow via parametric maturity ladder with real-time updates after every interbank operation." },
+        { "name": "📈 Profitability &amp; Customer Global Exposure", "desc": "Analytical reporting suite showing bank profitability by customer and branch, with a global view of all client positions." },
+        { "name": "💳 Payroll &amp; Online Trading",            "desc": "Monitored payroll accounting entries, generated gateway files for Core Banking, and supported the bank's online trading application." }
+      ]
+    },
+    {
+      "color": "var(--emerald)",
+      "title": "Software Developer",
+      "company": "Netiks",
+      "companyColor": "var(--emerald)",
+      "pillClass": "pill pill-emerald",
+      "period": "April 2003 — October 2007",
+      "projects": [
+        { "name": "🏠 Bank of Beirut — Real Estate Portal", "desc": "Developed the bank's digital real estate platform for customer-facing property services." },
+        { "name": "🌐 Bank of Beirut — Online Banking",      "desc": "Contributed to building the bank's online banking platform, enabling customers to manage accounts digitally." },
+        { "name": "📋 LACPA — Internal Administration System","desc": "Built an internal administration management application for the Lebanese Association of Certified Public Accountants." },
+        { "name": "🔬 Eurofins — Internal Application",       "desc": "Developed an internal operations management application for a European medical laboratory company." }
+      ]
+    }
+  ],
+  "education": {
+    "degree":  "B.E. Computer &amp; Communication Engineering",
+    "details": "Lebanese University · Faculty of Engineering, Branch 2, Roumieh &nbsp;·&nbsp; Graduated October 2001"
+  }
+}

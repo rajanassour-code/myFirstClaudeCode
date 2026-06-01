@@ -1,0 +1,28 @@
+{
+  "statement": "I believe great technology should make people’s financial lives simpler, faster, and more secure — and I’ve spent 19 years working to prove it.",
+  "bio": [
+    "I am a driven Senior Team Leader with over 19 years of experience in the banking sector and a proven track record of success, including managing top-notch implementations of banking financing modules across Lebanon and Jordan.",
+    "Throughout my career I have led mission-critical projects spanning mobile banking platforms, treasury management systems, trade finance workflows, check clearing infrastructure, and Islamic banking portals — always focused on stability, scalability, and real-world impact for the thousands of customers and branch staff relying on those systems every day.",
+    "Reliable, trustworthy, and hardworking, I remain eager to learn new skills and stay ahead of the rapid evolution of banking technologies. Whether leading a cross-functional team or diving deep into a technical challenge, I approach every task with the same level of care and commitment."
+  ],
+  "values": [
+    { "icon": "🔎", "color": "var(--indigo-lt)", "title": "Analytical Thinking",  "desc": "Clear, logical reasoning applied to every technical and operational challenge." },
+    { "icon": "🤝", "color": "var(--emerald-lt)","title": "Reliability",          "desc": "Teams and customers can count on me to deliver and follow through, every time." },
+    { "icon": "📈", "color": "var(--amber-lt)",  "title": "Continuous Learning", "desc": "Staying current with evolving banking tech is not optional — it’s a commitment." },
+    { "icon": "🎗️", "color": "var(--cyan-lt)", "title": "Impact at Scale", "desc": "Building systems that serve thousands reliably — that is what motivates me." }
+  ],
+  "profile": {
+    "name":       "Raja J. Nassour",
+    "role":       "Senior Team Leader · Blom Bank IS Division",
+    "location":   "Fanar, Beirut",
+    "country":    "Lebanon",
+    "experience": "19+ years",
+    "sector":     "Banking &amp; Fintech",
+    "email":      "rajanassour@yahoo.com"
+  },
+  "education": {
+    "degree":    "B.E. Computer &amp; Communication Engineering",
+    "university":"Lebanese University · Faculty of Engineering, Branch 2, Roumieh",
+    "graduated": "October 2001"
+  }
+}

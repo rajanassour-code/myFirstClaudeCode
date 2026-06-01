@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Experience — Raja J. Nassour</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .exp-hero { background: url('assets/images/experience.jpeg') center / cover no-repeat; }
+    .timeline { position: relative; padding-left: 48px; }
+    .timeline::before { content: ""; position: absolute; left: 15px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--indigo), var(--cyan), var(--emerald), var(--s200)); border-radius: 2px; }
+    .tl-item { position: relative; margin-bottom: 44px; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot { position: absolute; left: -41px; top: 24px; width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--surface); box-shadow: 0 0 0 2px currentColor, var(--sh-sm); }
+    .job-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--sh-sm); transition: box-shadow .2s, transform .2s; }
+    .job-card:hover { box-shadow: var(--sh-lg); transform: translateY(-3px); }
+    .job-card-top { padding: 28px 32px 22px; border-bottom: 1px solid var(--border); }
+    .job-meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+    .job-title  { font-size: 1.1rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: 4px; }
+    .job-co     { font-size: .88rem; font-weight: 600; }
+    .job-period { font-size: .78rem; font-weight: 700; padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
+    .job-card-body { padding: 24px 32px; }
+    .projects { display: flex; flex-direction: column; gap: 16px; }
+    .project { padding-left: 15px; border-left: 3px solid var(--s200); transition: border-color .15s; }
+    .project:hover { border-left-color: var(--indigo); }
+    .proj-name { font-size: .88rem; font-weight: 700; margin-bottom: 3px; color: var(--text); }
+    .proj-desc { font-size: .82rem; color: var(--s600); line-height: 1.62; }
+    .edu-block { margin-top: 52px; background: linear-gradient(135deg, rgba(15,23,42,.9), rgba(30,27,75,.95)); border-radius: var(--r); padding: 36px 40px; color: #fff; display: flex; align-items: center; gap: 28px; }
+    .edu-block-icon { width: 64px; height: 64px; background: rgba(255,255,255,.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; }
+    .edu-ey  { font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 6px; }
+    .edu-deg { font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 5px; }
+    .edu-det { font-size: .85rem; color: rgba(255,255,255,.52); }
+    @media (max-width: 640px) { .timeline { padding-left: 28px; } .tl-dot { left: -22px; } .job-card-top, .job-card-body { padding: 22px 20px; } .edu-block { flex-direction: column; text-align: center; padding: 28px 22px; } }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="nav-badge">RJN</div>Raja J. Nassour</a>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html" class="active">Experience</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nt" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="photo-hero exp-hero">
+  <div class="photo-hero-overlay"></div>
+  <div class="photo-hero-content on-photo">
+    <div class="eyebrow eyebrow-line" style="color:rgba(255,255,255,.5);">Career Journey</div>
+    <h1 class="h1" style="color:#fff;margin-top:10px;margin-bottom:12px;">Experience</h1>
+    <p class="lead" style="color:rgba(255,255,255,.62);max-width:520px;">
+      Over 19 years delivering banking technology — from mobile apps serving 120,000 users to treasury systems and digital workflows spanning 80+ branches.
+    </p>
+  </div>
+</div>
+
+<main class="page">
+  <div class="timeline" id="timeline"></div>
+  <div class="edu-block" id="edu-block"></div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+
+<script src="cms-loader.js"></script>
+<script>
+  loadPage('experience', function(d) {
+    document.getElementById('timeline').innerHTML = d.jobs.map(function(job) {
+      var projects = job.projects.map(function(p) {
+        return '<div class="project"><div class="proj-name">' + p.name + '</div><div class="proj-desc">' + p.desc + '</div></div>';
+      }).join('');
+      return '<div class="tl-item">' +
+        '<div class="tl-dot" style="color:' + job.color + ';background:' + job.color + ';"></div>' +
+        '<div class="job-card">' +
+          '<div class="job-card-top">' +
+            '<div class="job-meta">' +
+              '<div><div class="job-title">' + job.title + '</div><div class="job-co" style="color:' + job.companyColor + ';">' + job.company + '</div></div>' +
+              '<span class="job-period ' + job.pillClass + '">' + job.period + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="job-card-body"><div class="projects">' + projects + '</div></div>' +
+        '</div>' +
+        '</div>';
+    }).join('');
+
+    document.getElementById('edu-block').innerHTML =
+      '<div class="edu-block-icon">🎓</div>' +
+      '<div><div class="edu-ey">Education</div>' +
+      '<div class="edu-deg">' + d.education.degree + '</div>' +
+      '<div class="edu-det">' + d.education.details + '</div></div>';
+  });
+
+  loadContact(function(c) { renderFooter('site-footer', c); });
+</script>
+</body>
+</html>

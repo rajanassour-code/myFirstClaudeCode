@@ -1,0 +1,27 @@
+{
+  "hero": {
+    "badge": "Senior Banking Technology Leader",
+    "nameFirst": "Raja J.",
+    "nameLast": "Nassour",
+    "role": "Assistant Head of Department &amp; Senior Team Leader",
+    "location": "Fanar, Beirut — Lebanon",
+    "chips": [
+      { "icon": "📱", "value": "120K+", "text": "mobile app users" },
+      { "icon": "🏦", "value": "19+",   "text": "years in banking tech" },
+      { "icon": "✅", "value": "10K+",  "text": "checks cleared daily" }
+    ],
+    "ctaPrimary":   { "label": "About Me",     "href": "about.html" },
+    "ctaSecondary": { "label": "Get in Touch",  "href": "contact.html" },
+    "ctaCV":        { "label": "Download CV",   "href": "CV - Raja Nassour-5.pdf" }
+  },
+  "stats": [
+    { "num": "19+",   "label": "Years Experience" },
+    { "num": "120K+", "label": "App Users" },
+    { "num": "10K+",  "label": "Checks / Day" },
+    { "num": "80+",   "label": "Branches Served" }
+  ],
+  "intro": {
+    "heading": "Banking technology professional with a proven track record.",
+    "text": "Over 19 years delivering reliable, scalable financial systems — from mobile banking apps with 120,000 users to treasury platforms and digital branch workflows spanning 80+ locations."
+  }
+}

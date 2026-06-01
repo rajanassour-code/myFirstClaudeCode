@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Raja J. Nassour — Senior Team Leader & Banking Technology Specialist. 19+ years experience in Lebanon."/>
+  <title>Raja J. Nassour — Banking Technology Specialist</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .hero {
+      position: relative;
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      background: url('assets/images/home.jpeg') center / cover no-repeat;
+      overflow: hidden;
+    }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(120deg,rgba(15,23,42,.88) 0%,rgba(15,23,42,.70) 50%,rgba(15,23,42,.40) 100%); z-index: 1; }
+    .hero-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.35) 100%); z-index: 2; }
+    .hero-inner { position: relative; z-index: 3; max-width: var(--max-w); margin: 0 auto; padding: 80px 32px; width: 100%; display: grid; grid-template-columns: 1fr 380px; align-items: center; gap: 64px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 9px; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.20); color: rgba(255,255,255,.8); font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; }
+    .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 2.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.35} }
+    .hero-name { font-size: clamp(2.8rem, 6vw, 4.6rem); font-weight: 900; letter-spacing: -.05em; line-height: 1.0; color: #fff; margin-bottom: 14px; }
+    .hero-name span { background: linear-gradient(135deg, #a5b4fc 0%, #67e8f9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-role { font-size: 1.1rem; color: rgba(255,255,255,.62); font-weight: 400; margin-bottom: 8px; }
+    .hero-location { display: inline-flex; align-items: center; gap: 6px; font-size: .875rem; color: rgba(255,255,255,.4); margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-photo-col { display: flex; flex-direction: column; gap: 16px; }
+    .hero-photo-card { position: relative; z-index: 1; border-radius: 20px; background: rgba(255,255,255,.07); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.14); padding: 40px 28px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+    .profile-photo-real { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,.35); box-shadow: 0 4px 24px rgba(0,0,0,.35); display: block; }
+    .hero-pc-name { font-size: 1rem; font-weight: 700; color: #fff; }
+    .hero-pc-title { font-size: .8rem; color: rgba(255,255,255,.5); margin-top: -6px; }
+    .hero-chips { display: flex; flex-direction: column; gap: 9px; width: 100%; margin-top: 4px; }
+    .hero-chip { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: 10px 14px; font-size: .82rem; color: rgba(255,255,255,.72); }
+    .hero-chip .chip-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
+    .hero-chip strong { color: #fff; }
+    .stats-bar { background: #fff; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+    .stats-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat { padding: 26px 16px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-size: 1.9rem; font-weight: 900; letter-spacing: -.04em; background: linear-gradient(135deg, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: .78rem; color: var(--muted); font-weight: 500; margin-top: 2px; }
+    .intro-strip { background: linear-gradient(135deg, var(--navy) 0%, #1e1b4b 60%, #0c4a6e 100%); border-radius: var(--r); padding: 48px 52px; color: #fff; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; margin-bottom: 56px; }
+    .intro-strip h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: -.02em; }
+    .intro-strip p { color: rgba(255,255,255,.65); font-size: .95rem; line-height: 1.75; max-width: 560px; }
+    .qn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .qn-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 28px; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--sh-sm); transition: box-shadow .2s, transform .2s; color: var(--text); }
+    .qn-card:hover { box-shadow: var(--sh-lg); transform: translateY(-4px); }
+    .qn-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+    .qn-title { font-size: 1rem; font-weight: 700; }
+    .qn-desc { font-size: .84rem; color: var(--muted); line-height: 1.55; flex: 1; }
+    .qn-cta { font-size: .82rem; font-weight: 700; display: flex; align-items: center; gap: 5px; transition: gap .14s; }
+    .qn-card:hover .qn-cta { gap: 9px; }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-col { display: none; }
+      .hero-name { font-size: 2.8rem; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(3) { border-top: 1px solid var(--border); }
+      .intro-strip { grid-template-columns: 1fr; text-align: center; }
+      .intro-strip .btn-primary { margin: 0 auto; }
+    }
+    @media (max-width: 520px) {
+      .hero-inner { padding: 56px 20px; }
+      .stats-inner { padding: 0 20px; }
+      .intro-strip { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><div class="nav-badge">RJN</div> Raja J. Nassour</a>
+    <ul class="nav-links" id="nl">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nt" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span class="dot"></span><span id="hero-badge"></span></div>
+      <h1 class="hero-name" id="hero-name"></h1>
+      <p class="hero-role" id="hero-role"></p>
+      <div class="hero-location">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span id="hero-location"></span>
+      </div>
+      <div class="hero-actions" id="hero-actions"></div>
+    </div>
+    <div class="hero-photo-col">
+      <div class="hero-photo-card">
+        <img src="assets/images/raja_profile.jpeg" alt="Raja J. Nassour" class="profile-photo-real"/>
+        <div class="hero-pc-name" id="hero-pc-name"></div>
+        <div class="hero-pc-title" id="hero-pc-title"></div>
+        <div class="hero-chips" id="hero-chips"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-inner" id="stats-bar"></div>
+</div>
+
+<main class="page">
+  <div class="intro-strip">
+    <div>
+      <h2 id="intro-heading"></h2>
+      <p id="intro-text"></p>
+    </div>
+    <a href="about.html" class="btn btn-primary" style="flex-shrink:0;">Read my story</a>
+  </div>
+
+  <div class="section-hd">
+    <div class="eyebrow eyebrow-line">Explore the site</div>
+    <h2 class="h2" style="margin-top:8px;">Everything about me</h2>
+    <p class="lead">My background, career journey, technical skills, and how to reach me.</p>
+  </div>
+
+  <div class="qn-grid">
+    <a href="about.html" class="qn-card">
+      <div class="qn-icon" style="background:var(--indigo-lt);">👤</div>
+      <div class="qn-title">About Me</div>
+      <div class="qn-desc">My background, personal values, and what drives me every day in banking technology.</div>
+      <div class="qn-cta" style="color:var(--indigo);">Read more <span>→</span></div>
+    </a>
+    <a href="experience.html" class="qn-card">
+      <div class="qn-icon" style="background:var(--cyan-lt);">💼</div>
+      <div class="qn-title">Experience</div>
+      <div class="qn-desc">19+ years at Blom Bank, Bank of Beirut, and Netiks — detailed career timeline.</div>
+      <div class="qn-cta" style="color:var(--cyan);">View timeline <span>→</span></div>
+    </a>
+    <a href="skills.html" class="qn-card">
+      <div class="qn-icon" style="background:var(--emerald-lt);">⚙️</div>
+      <div class="qn-title">Technical Skills</div>
+      <div class="qn-desc">iOS, .NET, Python, React, Oracle, MongoDB — my complete technical toolkit.</div>
+      <div class="qn-cta" style="color:var(--emerald);">See skills <span>→</span></div>
+    </a>
+    <a href="contact.html" class="qn-card">
+      <div class="qn-icon" style="background:var(--amber-lt);">✉️</div>
+      <div class="qn-title">Contact</div>
+      <div class="qn-desc">Phone, email, and location. Always open to new opportunities and conversations.</div>
+      <div class="qn-cta" style="color:var(--amber);">Get in touch <span>→</span></div>
+    </a>
+  </div>
+</main>
+
+<footer class="footer" id="site-footer"></footer>
+
+<script src="cms-loader.js"></script>
+<script>
+  loadPage('home', function(d) {
+    // Hero
+    setText('hero-badge', d.hero.badge);
+    document.getElementById('hero-name').innerHTML =
+      d.hero.nameFirst + '<br><span>' + d.hero.nameLast + '</span>';
+    setText('hero-role', d.hero.role);
+    setText('hero-location', d.hero.location);
+    setText('hero-pc-name', d.hero.nameFirst + ' ' + d.hero.nameLast);
+    setText('hero-pc-title', 'Senior Team Leader · Blom Bank IS');
+
+    // CTA buttons
+    var chipColors = ['rgba(79,70,229,.25)', 'rgba(5,150,105,.25)', 'rgba(234,88,12,.25)'];
+    document.getElementById('hero-actions').innerHTML =
+      '<a href="' + d.hero.ctaPrimary.href + '" class="btn btn-primary">' + d.hero.ctaPrimary.label + '</a>' +
+      '<a href="' + d.hero.ctaSecondary.href + '" class="btn btn-ghost-white">' + d.hero.ctaSecondary.label + '</a>' +
+      '<a href="' + d.hero.ctaCV.href + '" download class="btn btn-ghost-white">' +
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+        d.hero.ctaCV.label + '</a>';
+
+    // Chips
+    document.getElementById('hero-chips').innerHTML = d.hero.chips.map(function(c, i) {
+      return '<div class="hero-chip"><div class="chip-icon" style="background:' + chipColors[i] + ';">' + c.icon + '</div><div><strong>' + c.value + '</strong> ' + c.text + '</div></div>';
+    }).join('');
+
+    // Stats bar
+    document.getElementById('stats-bar').innerHTML = d.stats.map(function(s) {
+      return '<div class="stat"><div class="stat-num">' + s.num + '</div><div class="stat-label">' + s.label + '</div></div>';
+    }).join('');
+
+    // Intro
+    setText('intro-heading', d.intro.heading);
+    setText('intro-text', d.intro.text);
+  });
+
+  loadContact(function(c) {
+    renderFooter('site-footer', c);
+  });
+</script>
+</body>
+</html>

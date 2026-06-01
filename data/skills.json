@@ -1,0 +1,44 @@
+{
+  "stats": [
+    { "num": "3",  "label": "Skill Categories" },
+    { "num": "12", "label": "Technologies" },
+    { "num": "9",  "label": "Banking Domains" }
+  ],
+  "categories": [
+    {
+      "icon": "📱",
+      "iconBg": "var(--indigo-lt)",
+      "title": "Mobile Development",
+      "desc": "Native iOS application development for high-traffic banking platforms",
+      "pillClass": "p-indigo",
+      "skills": ["Swift", "Objective-C", "iOS SDK", "Xcode"]
+    },
+    {
+      "icon": "⚙️",
+      "iconBg": "var(--cyan-lt)",
+      "title": "Backend &amp; Web Development",
+      "desc": "Server-side logic, REST APIs, and full-stack web applications for enterprise banking",
+      "pillClass": "p-cyan",
+      "skills": [".NET", "Java", "Python", "Node.js", "React", "PHP"]
+    },
+    {
+      "icon": "🗄️",
+      "iconBg": "var(--emerald-lt)",
+      "title": "Databases",
+      "desc": "Relational and NoSQL data management for high-volume, mission-critical banking systems",
+      "pillClass": "p-emerald",
+      "skills": ["Oracle", "MS SQL Server", "MySQL", "MongoDB"]
+    }
+  ],
+  "domains": [
+    { "icon": "📱", "text": "Mobile Banking" },
+    { "icon": "💹", "text": "Treasury Systems" },
+    { "icon": "📋", "text": "Trade Finance" },
+    { "icon": "🔄", "text": "Digital Workflows" },
+    { "icon": "✅", "text": "Check Clearing" },
+    { "icon": "📊", "text": "Asset Management" },
+    { "icon": "💱", "text": "FX &amp; Capital Markets" },
+    { "icon": "🕌", "text": "Islamic Banking" },
+    { "icon": "👥", "text": "Team Leadership" }
+  ]
+}

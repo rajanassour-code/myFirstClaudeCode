@@ -1,0 +1,17 @@
+{
+  "phone":      "+961 3 987 390",
+  "email":      "rajanassour@yahoo.com",
+  "address":    "Street 14-G-4, Building No 39, 1st Floor - Fanar",
+  "city":       "Beirut, Lebanon",
+  "availability": {
+    "title":  "Currently Available",
+    "text":   "Open to new roles, consulting engagements, and interesting projects in banking technology and fintech across Lebanon and the wider region.",
+    "badge":  "Available for opportunities",
+    "active": true
+  },
+  "quickInfo": [
+    { "icon": "🌍", "iconBg": "var(--indigo-lt)",  "text": "Fanar, Beirut, Lebanon" },
+    { "icon": "🏦", "iconBg": "var(--emerald-lt)", "text": "Banking Technology" },
+    { "icon": "⏱️", "iconBg": "var(--amber-lt)",   "text": "19+ years experience" }
+  ]
+}

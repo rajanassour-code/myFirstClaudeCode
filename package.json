@@ -1,29 +1,13 @@
 {
-  "name": "rajanassour-website",
-  "version": "0.1.0",
-  "private": true,
+  "name": "rajanassour-cms",
+  "version": "1.0.0",
+  "description": "Raja J. Nassour personal website with CMS back office",
+  "main": "server.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "dependencies": {
-    "next": "14.2.5",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-hot-toast": "^2.4.1",
-    "lucide-react": "^0.400.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.5",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "express": "^4.19.2"
   }
 }
