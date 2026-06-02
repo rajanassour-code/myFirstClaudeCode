@@ -89,13 +89,7 @@ app.get('/admin', requireAuth, (_req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'index.html'))
 })
 
-// ── API: auth check ───────────────────────────────────────────
-app.use('/api/content', (req, res, next) => {
-  if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' })
-  next()
-})
-
-// ── API: read content ─────────────────────────────────────────
+// ── API: read content (public — website pages use this) ───────
 app.get('/api/content/:section', (req, res) => {
   const file = path.join(DATA_DIR, `${req.params.section}.json`)
   if (!fs.existsSync(file)) return res.status(404).json({ error: 'Not found' })
@@ -106,8 +100,8 @@ app.get('/api/content/:section', (req, res) => {
   }
 })
 
-// ── API: save content ─────────────────────────────────────────
-app.put('/api/content/:section', (req, res) => {
+// ── API: save content (protected — admin only) ────────────────
+app.put('/api/content/:section', requireAuth, (req, res) => {
   const allowed = ['home', 'about', 'experience', 'skills', 'contact']
   if (!allowed.includes(req.params.section))
     return res.status(400).json({ error: 'Unknown section' })
