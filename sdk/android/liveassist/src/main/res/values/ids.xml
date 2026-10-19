@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- View tags used by LiveAssist.mask(view) / LiveAssist.noRemote(view) -->
+    <item name="liveassist_masked" type="id" />
+    <item name="liveassist_no_remote" type="id" />
+</resources>

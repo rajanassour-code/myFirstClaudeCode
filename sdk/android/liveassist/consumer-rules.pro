@@ -1,0 +1,3 @@
+-keep class org.webrtc.** { *; }
+-dontwarn org.webrtc.**
+-dontwarn androidx.compose.**
