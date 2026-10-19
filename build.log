@@ -1,0 +1,95 @@
+
+Welcome to Gradle 8.7!
+
+Here are the highlights of this release:
+ - Compiling and testing with Java 22
+ - Cacheable Groovy script compilation
+ - New methods in lazy collection properties
+
+For more details see https://docs.gradle.org/8.7/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :demo:preBuild UP-TO-DATE
+> Task :demo:preDebugBuild UP-TO-DATE
+> Task :demo:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :demo:checkKotlinGradlePluginConfigurationErrors
+> Task :demo:generateDebugBuildConfig
+> Task :liveassist:preBuild UP-TO-DATE
+> Task :liveassist:preDebugBuild UP-TO-DATE
+> Task :demo:generateDebugResValues
+> Task :liveassist:generateDebugResValues
+> Task :liveassist:writeDebugAarMetadata
+> Task :liveassist:generateDebugResources
+> Task :demo:checkDebugAarMetadata
+> Task :liveassist:packageDebugResources
+> Task :demo:mapDebugSourceSetPaths
+> Task :demo:generateDebugResources
+> Task :demo:packageDebugResources
+> Task :demo:mergeDebugResources
+> Task :demo:createDebugCompatibleScreenManifests
+> Task :demo:extractDeepLinksDebug
+> Task :liveassist:extractDeepLinksDebug
+> Task :demo:parseDebugLocalResources
+> Task :liveassist:processDebugManifest
+> Task :liveassist:compileDebugLibraryResources
+> Task :demo:processDebugMainManifest
+> Task :demo:processDebugManifest
+> Task :liveassist:checkKotlinGradlePluginConfigurationErrors
+> Task :liveassist:parseDebugLocalResources
+> Task :liveassist:javaPreCompileDebug
+> Task :demo:javaPreCompileDebug
+> Task :demo:processDebugManifestForPackage
+> Task :demo:mergeDebugShaders
+> Task :liveassist:generateDebugRFile
+> Task :demo:compileDebugShaders NO-SOURCE
+> Task :demo:processDebugResources
+> Task :demo:generateDebugAssets UP-TO-DATE
+> Task :liveassist:mergeDebugShaders
+> Task :liveassist:compileDebugShaders NO-SOURCE
+> Task :liveassist:generateDebugAssets UP-TO-DATE
+> Task :liveassist:packageDebugAssets
+> Task :demo:mergeDebugAssets
+> Task :demo:compressDebugAssets
+> Task :demo:desugarDebugFileDependencies
+> Task :demo:mergeDebugStartupProfile
+> Task :demo:mergeDebugJniLibFolders
+> Task :demo:checkDebugDuplicateClasses
+> Task :liveassist:mergeDebugJniLibFolders
+> Task :liveassist:mergeDebugNativeLibs NO-SOURCE
+> Task :liveassist:copyDebugJniLibsProjectOnly
+> Task :demo:validateSigningDebug
+> Task :demo:writeDebugAppMetadata
+> Task :demo:writeDebugSigningConfigVersions
+> Task :demo:mergeExtDexDebug
+> Task :demo:mergeDebugNativeLibs
+
+> Task :demo:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libjingle_peerconnection_so.so.
+
+> Task :liveassist:compileDebugKotlin
+w: file:///home/runner/work/myFirstClaudeCode/myFirstClaudeCode/sdk/android/liveassist/src/main/java/com/liveassist/sdk/CallSession.kt:97:13 Annotations on block-level expressions are being parsed differently depending on presence of a new line after them. Use new line if whole block-level expression must be annotated or wrap annotated expression in parentheses
+w: file:///home/runner/work/myFirstClaudeCode/myFirstClaudeCode/sdk/android/liveassist/src/main/java/com/liveassist/sdk/CallSession.kt:134:29 Annotations on block-level expressions are being parsed differently depending on presence of a new line after them. Use new line if whole block-level expression must be annotated or wrap annotated expression in parentheses
+w: file:///home/runner/work/myFirstClaudeCode/myFirstClaudeCode/sdk/android/liveassist/src/main/java/com/liveassist/sdk/CoBrowse.kt:341:63 Parameter 'rect' is never used
+w: file:///home/runner/work/myFirstClaudeCode/myFirstClaudeCode/sdk/android/liveassist/src/main/java/com/liveassist/sdk/CoBrowse.kt:386:25 Parameter 'v' is never used
+
+> Task :liveassist:compileDebugJavaWithJavac NO-SOURCE
+> Task :liveassist:bundleLibCompileToJarDebug
+> Task :liveassist:bundleLibRuntimeToJarDebug
+> Task :liveassist:processDebugJavaRes
+> Task :liveassist:bundleLibRuntimeToDirDebug
+> Task :demo:mergeLibDexDebug
+> Task :demo:compileDebugKotlin
+> Task :demo:compileDebugJavaWithJavac
+> Task :demo:dexBuilderDebug
+> Task :demo:mergeDebugGlobalSynthetics
+> Task :demo:processDebugJavaRes
+> Task :demo:mergeProjectDexDebug
+> Task :demo:mergeDebugJavaResource
+> Task :demo:packageDebug
+> Task :demo:createDebugApkListingFileRedirect
+> Task :demo:assembleDebug
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/build-1792441725115.json
+
+BUILD SUCCESSFUL in 1m 47s
+59 actionable tasks: 59 executed
