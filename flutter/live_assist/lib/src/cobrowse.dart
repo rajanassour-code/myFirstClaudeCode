@@ -347,7 +347,7 @@ class CoBrowseEngine {
         final nodeId = _fields[id];
         final node = nodeId == null ? null : _findNode(nodeId);
         if (node == null) return deny('field no longer on screen');
-        if (node.data.hasFlag(SemanticsFlag.isObscured)) return deny('sensitive field — only the customer can fill it');
+        if (node.getSemanticsData().hasFlag(SemanticsFlag.isObscured)) return deny('sensitive field — only the customer can fill it');
         if (_Registry.rects(_Kind.noRemote).any((r) => r.overlaps(node.rect))) return deny('only the customer can use this');
         final value = ((m['value'] as String?) ?? '');
         owner.performAction(node.id, SemanticsAction.setText, value.length > 500 ? value.substring(0, 500) : value);
