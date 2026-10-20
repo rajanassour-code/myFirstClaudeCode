@@ -1,0 +1,16 @@
+name: live_assist
+description: Live Video Assist SDK for Flutter — video calls with advisors and in-app co-browsing (view, mask, point, assisted control).
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_webrtc: ">=0.11.0 <2.0.0"
+  http: ">=1.1.0 <2.0.0"
+  web_socket_channel: ">=2.4.0 <4.0.0"
+  image: ">=4.1.0 <5.0.0"

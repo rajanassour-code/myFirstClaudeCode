@@ -1,0 +1,16 @@
+name: demo_bank
+description: Cedar Bank — Flutter demo app for the Live Video Assist SDK.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  live_assist:
+    path: ../live_assist
+
+flutter:
+  uses-material-design: true
