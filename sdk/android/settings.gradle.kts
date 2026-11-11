@@ -7,4 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "LiveAssistAndroid"
 include(":liveassist")   // the SDK (Android library)
-include(":demo")         // Cedar Bank demo app
+include(":demo")         // Talia Bank demo app

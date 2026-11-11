@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="CedarTheme" parent="android:Theme.Material.Light.DarkActionBar">
+    <style name="TaliaTheme" parent="android:Theme.Material.Light.DarkActionBar">
         <item name="android:colorPrimary">#0B5CAD</item>
         <item name="android:colorPrimaryDark">#0A4A8A</item>
         <item name="android:colorAccent">#0B5CAD</item>

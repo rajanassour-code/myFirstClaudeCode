@@ -18,7 +18,7 @@ import org.json.JSONObject
  *     LiveAssist.configure(this, "https://video.rajanassour.com")
  *
  *     // when the customer taps "Talk to an advisor"
- *     LiveAssist.startCall(name = "Layla", topic = "Cards", reference = sessionRef)
+ *     LiveAssist.startCall(name = "Talia", topic = "Cards", reference = sessionRef)
  *
  * The SDK shows its own floating call window, chat, consent prompts and co-browse indicators, and follows the
  * customer from activity to activity. Mark sensitive UI with LiveAssist.mask(view) / Modifier.liveAssistMasked()

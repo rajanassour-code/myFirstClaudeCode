@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:name=".DemoApp"
-        android:label="Cedar Bank"
+        android:label="Talia Bank"
         android:icon="@android:drawable/sym_def_app_icon"
-        android:theme="@style/CedarTheme"
+        android:theme="@style/TaliaTheme"
         android:supportsRtl="true">
         <activity
             android:name=".MainActivity"

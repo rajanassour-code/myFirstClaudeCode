@@ -29,7 +29,7 @@ class DemoApp : Application() {
     }
 }
 
-/** Cedar Bank demo: four tabs built with plain Android views, using the Live Assist SDK like a real bank app would. */
+/** Talia Bank demo: four tabs built with plain Android views, using the Live Assist SDK like a real bank app would. */
 class MainActivity : Activity() {
     private val brand = Color.rgb(11, 92, 173)
     private lateinit var body: LinearLayout
@@ -54,7 +54,7 @@ class MainActivity : Activity() {
         }
         root.addView(tabs)
         setContentView(root)
-        LiveAssist.onStateChange = { s -> if (s is LiveAssist.State.Ended) title = "Cedar Bank" }
+        LiveAssist.onStateChange = { s -> if (s is LiveAssist.State.Ended) title = "Talia Bank" }
         show("Home")
     }
 
@@ -68,11 +68,11 @@ class MainActivity : Activity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun startCall(topic: String) = LiveAssist.startCall(name = "Layla", topic = topic, reference = "ANDROID-APP-${(1000..9999).random()}")
+    private fun startCall(topic: String) = LiveAssist.startCall(name = "Talia", topic = topic, reference = "ANDROID-APP-${(1000..9999).random()}")
 
     private fun show(tab: String) {
         currentTab = tab
-        title = "Cedar Bank — $tab"
+        title = "Talia Bank — $tab"
         for (i in 0 until tabs.childCount) (tabs.getChildAt(i) as TextView).apply {
             val on = tag == tab; setTextColor(if (on) brand else Color.GRAY); setTypeface(null, if (on) Typeface.BOLD else Typeface.NORMAL)
         }
@@ -100,7 +100,7 @@ class MainActivity : Activity() {
 
     // ---- screens ----
     private fun home() {
-        body.addView(label("Good evening, Layla", 22f, bold = true), LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(12) })
+        body.addView(label("Good evening, Talia", 22f, bold = true), LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(12) })
         val iban1 = small("LB62 0999 0000 0001 0019 0122 9114").also { LiveAssist.mask(it) }   // 🔒 never shown to the advisor
         val iban2 = small("LB62 0999 0000 0001 0019 0122 7730").also { LiveAssist.mask(it) }
         card(small("Your accounts"), row(label("Current account", bold = true), label("$4,812.50", bold = true)), iban1,
@@ -131,9 +131,9 @@ class MainActivity : Activity() {
         val face = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL; setPadding(dp(18), dp(18), dp(18), dp(18))
             background = GradientDrawable().apply { setColor(Color.rgb(30, 41, 59)); cornerRadius = dp(18).toFloat() }
-            addView(label("Cedar Visa · Debit", 13f, color = Color.WHITE))
+            addView(label("Talia Visa · Debit", 13f, color = Color.WHITE))
             addView(pan, LinearLayout.LayoutParams(-2, -2).apply { topMargin = dp(24); bottomMargin = dp(24) })
-            addView(row(label("LAYLA NASSER", 13f, color = Color.WHITE), expiry))
+            addView(row(label("TALIA NASSOUR", 13f, color = Color.WHITE), expiry))
         }
         body.addView(face, LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(10) })
         body.addView(label("CVV 731").also { LiveAssist.mask(it) }, LinearLayout.LayoutParams(-2, -2).apply { bottomMargin = dp(12) })
